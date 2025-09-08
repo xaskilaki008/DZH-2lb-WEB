@@ -31,11 +31,12 @@ class FormValidation {
     ];
 
     public function setRule($field_name, $validator_name) {
-        if (!$this->rules[$field_name]) {
+        // Проверяем, существует ли уже такой ключ в массиве правил
+        if (!isset($this->rules[$field_name])) {
             $this->rules[$field_name] = [];
         }
         array_push($this->rules[$field_name], $validator_name);
-	}
+    }
 
     public function getErrors() {
         return $this->errors;

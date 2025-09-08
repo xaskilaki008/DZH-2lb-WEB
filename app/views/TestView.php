@@ -19,19 +19,19 @@
             <div id="checkQ">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="inlineCheckbox1" 
-                        <? echo isset($_POST["checkbox1"]) ? "checked" : "" ?>
+                        <?php echo isset($_POST["checkbox1"]) ? "checked" : "" ?>
                         name="checkbox1" value="Объединение">
                     <label class="form-check-label" for="inlineCheckbox1">Объединение</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="inlineCheckbox2" 
-                        <? echo isset($_POST["checkbox2"]) ? "checked" : "" ?>
+                        <?php echo isset($_POST["checkbox2"]) ? "checked" : "" ?>
                         name="checkbox2" value="Импликация">
                     <label class="form-check-label" for="inlineCheckbox2">Импликация</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="inlineCheckbox3" 
-                        <? echo isset($_POST["checkbox3"]) ? "checked" : "" ?>
+                        <?php echo isset($_POST["checkbox3"]) ? "checked" : "" ?>
                         name="checkbox3" value="Дополнение">
                     <label class="form-check-label" for="inlineCheckbox3">Дополнение</label>
                 </div>
@@ -42,15 +42,15 @@
             <select class="form-control" id="inputSelect" name="q2">
                 <option>Выберите ответ</option>
                 <optgroup label=">30">
-                    <option <?= $_POST["q2"] === "31" ? " selected='selected'" : "" ?>>31</option>
-                    <option <?= $_POST["q2"] === "32" ? " selected='selected'" : "" ?>>32</option>
-                    <option <?= $_POST["q2"] === "33" ? " selected='selected'" : "" ?>>33</option>
+                    <option <?php echo (isset($_POST["q2"]) && $_POST["q2"] === "31") ? " selected='selected'" : "" ?>>31</option>
+                    <option <?php echo (isset($_POST["q2"]) && $_POST["q2"] === "32") ? " selected='selected'" : "" ?>>32</option>
+                    <option <?php echo (isset($_POST["q2"]) && $_POST["q2"] === "33") ? " selected='selected'" : "" ?>>33</option>
                 </optgroup>
                 <optgroup label="<30">
-                    <option <?= $_POST["q2"] === "2" ? " selected='selected'" : "" ?>>2</option>
-                    <option <?= $_POST["q2"] === "20" ? " selected='selected'" : "" ?>>20</option>
-                    <option <?= $_POST["q2"] === "25" ? " selected='selected'" : "" ?>>25</option>
-                    <option <?= $_POST["q2"] === "28" ? " selected='selected'" : "" ?>>28</option>
+                    <option <?php echo (isset($_POST["q2"]) && $_POST["q2"] === "2") ? " selected='selected'" : "" ?>>2</option>
+                    <option <?php echo (isset($_POST["q2"]) && $_POST["q2"] === "20") ? " selected='selected'" : "" ?>>20</option>
+                    <option <?php echo (isset($_POST["q2"]) && $_POST["q2"] === "25") ? " selected='selected'" : "" ?>>25</option>
+                    <option <?php echo (isset($_POST["q2"]) && $_POST["q2"] === "28") ? " selected='selected'" : "" ?>>28</option>
                 </optgroup>
             </select>
         </div>

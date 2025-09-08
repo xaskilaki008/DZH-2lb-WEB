@@ -1,7 +1,7 @@
 <section class="content container">
     <form action="/contact/check" method="POST">
         <div class="form-group">
-            <input type="text" class="form-control tooltip-input" name="fullname" value="<?if (isset($_POST["fullname"])) echo $_POST["fullname"];?>"
+            <input type="text" class="form-control tooltip-input" name="fullname" value="<?php if (isset($_POST["fullname"])) echo $_POST["fullname"];?>"
                 title="Фамилия Имя Отчество через пробел" placeholder="Введите ваше ФИО" autocomplete="off">
         </div>
         <div class="form-group">
@@ -16,20 +16,20 @@
         </div>
         <div class="form-group">
             <input type="date" class="form-control tooltip-input" name="date" title="Выберите вашу дату рождения" 
-                autocomplete="off" value="<?if (isset($_POST["date"])) echo $_POST["date"];?>">
+                autocomplete="off" value="<?php if (isset($_POST["date"])) echo $_POST["date"];?>">
         </div>
         <div class="form-group">
             <input type="text" class="form-control tooltip-input" name="phone" title="Пример: +79781234567"
-                placeholder="Введите номер телефона" value="<?if (isset($_POST["phone"])) echo $_POST["phone"];?>" 
+                placeholder="Введите номер телефона" value="<?php if (isset($_POST["phone"])) echo $_POST["phone"];?>" 
                 autocomplete="off">
         </div>
         <div class="form-group">
             <input type="text" class="form-control tooltip-input" name="Email" title="Пример: ivanov@gmail.com"
-                value="<?if (isset($_POST["Email"])) echo $_POST["Email"];?>" 
+                value="<?php if (isset($_POST["Email"])) echo $_POST["Email"];?>" 
                 placeholder="Введите email" autocomplete="off">
         </div>
         <div class="form-group">
-            <textarea class="form-control" name="message" rows="4" placeholder="Введите сообщение"><?if (isset($_POST["message"])) echo $_POST["message"];?></textarea>
+            <textarea class="form-control" name="message" rows="4" placeholder="Введите сообщение"><?php if (isset($_POST["message"])) echo $_POST["message"];?></textarea>
         </div>
         <button class="btn btn-primary" type="submit">Отправить</button>
     </form>

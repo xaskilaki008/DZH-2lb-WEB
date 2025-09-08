@@ -12,13 +12,14 @@ class GuestBookModel extends Model {
     }
 
     public function addReview($data) {
-        $file = fopen('reviews.inc', 'a+');
-
-        foreach($data as $item) {
-            $str .= $item . ';';
-        }
-
-        fwrite($file, "$str\n");
-        fclose($file);
+    $file = fopen('reviews.inc', 'a+');
+    $str = ''; // Инициализируем переменную
+    
+    foreach($data as $item) {
+        $str .= $item . ';';
     }
+
+    fwrite($file, "$str\n");
+    fclose($file);
+}
 }

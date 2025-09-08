@@ -25,17 +25,11 @@
                     <li class="nav-item">
                         <a class="nav-link <?php if ($title == "Главная") echo('menu-link-active') ?>" href="/">Главная</a>
                     </li>
-                                        <li class="nav-item">
-                        <a class="nav-link <?php if ($title == "Учеба") echo('menu-link-active') ?>" href="/studies">Учеба</a>
-                    </li>
-                                        <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link <?php if ($title == "Контакт") echo('menu-link-active') ?>" href="/contact">Контакт</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?php if ($title == "Тест") echo('menu-link-active') ?>" href="/test">Тест</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php if ($title == "История") echo('menu-link-active') ?>" href="/history">История</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?php if ($title == "Гостевая книга") echo('menu-link-active') ?>" href="/guestbook">Гостевая книга</a>

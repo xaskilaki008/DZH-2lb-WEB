@@ -1,16 +1,16 @@
 <section class="content container">
     <form action="/guestbook/create" method="POST">
         <div class="form-group">
-            <input type="text" class="form-control tooltip-input" name="fullname" value="<?if (isset($_POST["fullname"])) echo $_POST["fullname"];?>"
+            <input type="text" class="form-control tooltip-input" name="fullname" value="<?php if (isset($_POST["fullname"])) echo $_POST["fullname"];?>"
                 title="Фамилия Имя Отчество" placeholder="Введите ваше ФИО" autocomplete="off">
         </div>
         <div class="form-group">
             <input type="text" class="form-control tooltip-input" name="Email" title="Пример: ivanov@gmail.com"
-                value="<?if (isset($_POST["Email"])) echo $_POST["Email"];?>" 
+                value="<?php if (isset($_POST["Email"])) echo $_POST["Email"];?>" 
                 placeholder="Введите email" autocomplete="off">
         </div>
         <div class="form-group">
-            <textarea class="form-control" name="review" rows="4" placeholder="Введите отзыв"><?if (isset($_POST["review"])) echo $_POST["review"];?></textarea>
+            <textarea class="form-control" name="review" rows="4" placeholder="Введите отзыв"><?php if (isset($_POST["review"])) echo $_POST["review"];?></textarea>
         </div>
         <button class="btn btn-primary" type="submit">Отправить</button>
     </form>

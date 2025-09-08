@@ -6,12 +6,12 @@
                 <label for="inputFio">ФИО</label>
                 <input type="text" class="form-control tooltip-input" name="fullname" 
                     title="Фамилия Имя Отчество через пробел" placeholder="Введите ваше ФИО" 
-                    value="<?if (isset($_POST["fullname"])) echo $_POST["fullname"];?>" autocomplete="off" autofocus>
+                    value="<?php if (isset($_POST["fullname"])) echo $_POST["fullname"];?>" autocomplete="off" autofocus>
             </div>
             <div class="form-group col-md-6">
                 <label for="inputGroup">Группа</label>
                 <input type="text" class="form-control tooltip-input" name="group" placeholder="Введите название группы"
-                    value="<?if (isset($_POST["group"])) echo $_POST["group"];?>" title="Пример: ИС-32" autocomplete="off">
+                    value="<?php if (isset($_POST["group"])) echo $_POST["group"];?>" title="Пример: ИС-32" autocomplete="off">
             </div>
         </div>
         <div class="form-group">
@@ -57,7 +57,7 @@
         <div class="form-group">
             <label for="inputQ">Что такое множество?</label>
             <input type="text" class="form-control" id="inputQ" name="q3" 
-                value="<?if (isset($_POST["q3"])) echo $_POST["q3"];?>" placeholder="Введите ответ" autocomplete="off">
+                value="<?php if (isset($_POST["q3"])) echo $_POST["q3"];?>" placeholder="Введите ответ" autocomplete="off">
         </div>
         <button class="btn btn-primary" type="submit">Отправить</button>
     </form>

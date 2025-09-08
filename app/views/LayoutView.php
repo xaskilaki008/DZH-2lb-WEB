@@ -25,27 +25,10 @@
                     <li class="nav-item">
                         <a class="nav-link <?php if ($title == "Главная") echo('menu-link-active') ?>" href="/">Главная</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php if ($title == "Обо мне") echo('menu-link-active') ?>" href="/about">Обо мне</a>
-                    </li>
-                    <li class="nav-item dropdown" id="drop">
-                        <a class="nav-link dropdown-toggle <?php if ($title == "Мои интересы") echo('menu-link-active') ?>" 
-                            id="dropdown_menu" href="hobby">Мои интересы</a>
-                        <ul class="dropdown-menu" id="menu-list">
-                            <li><a class="dropdown-item" href="hobby#films">Фильмы</a></li>
-                            <li><a class="dropdown-item" href="hobby#music">Музыка</a></li>
-                            <li><a class="dropdown-item" href="hobby#books">Книги</a></li>
-                            <li><a class="dropdown-item" href="hobby#sport">Спорт</a></li>
-                            <li><a class="dropdown-item" href="hobby#games">Игры</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
+                                        <li class="nav-item">
                         <a class="nav-link <?php if ($title == "Учеба") echo('menu-link-active') ?>" href="/studies">Учеба</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php if ($title == "Фотоальбом") echo('menu-link-active') ?>" href="/photo">Фотоальбом</a>
-                    </li>
-                    <li class="nav-item">
+                                        <li class="nav-item">
                         <a class="nav-link <?php if ($title == "Контакт") echo('menu-link-active') ?>" href="/contact">Контакт</a>
                     </li>
                     <li class="nav-item">

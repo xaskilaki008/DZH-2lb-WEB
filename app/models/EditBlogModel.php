@@ -41,28 +41,43 @@ class EditBlogModel extends Model {
 
     public function addPost($post_array, $files_array) {
         if ($files_array["file"]["size"] > 0) {
-            $timestamp = date_timestamp_get(date_create());
-            $this->saveImageInFolder($files_array, $timestamp);
+            $timestamp = time(); // Более простая альтернатива
+            $image_path = $this->saveImageInFolder($files_array, $timestamp);
             $data = [
                 "title" => $post_array["title"],
-                "image" => "uploads/" . $timestamp . "_" . $files_array["file"]["name"],
-                "text" => $post_array["message"]
+                "image" => $image_path,
+                "text" => $post_array["message"],
+                "date" => date('Y-m-d H:i:s')
             ];
         } else {
             $data = [
                 "title" => $post_array["title"],
                 "image" => NULL,
-                "text" => $post_array["message"]
+                "text" => $post_array["message"],
+                "date" => date('Y-m-d H:i:s')
             ];
         }
-        array_push($data, date('Y-m-d H:i:s'));
 
         $this->save($data);
     }
 
     private function saveImageInFolder($files_array, $timestamp) {
-        $uploadDir = 'uploads/';
-        $uploadFile = $uploadDir . $timestamp . "_" . basename($files_array['file']['name']);
-        move_uploaded_file($files_array['file']['tmp_name'], $uploadFile);
+        // Создаем папку uploads если ее нет
+        $upload_dir = $_SERVER['DOCUMENT_ROOT'] . '/uploads/';
+        if (!file_exists($upload_dir)) {
+            mkdir($upload_dir, 0755, true);
+        }
+        
+        // Генерируем имя файла
+        $original_name = basename($files_array['file']['name']);
+        $new_filename = $timestamp . '_' . $original_name;
+        $target_file = $upload_dir . $new_filename;
+
+        // Перемещаем файл
+        if (move_uploaded_file($files_array['file']['tmp_name'], $target_file)) {
+            return 'uploads/' . $new_filename; // Возвращаем относительный путь для БД
+        } else {
+            throw new Exception("Ошибка загрузки файла: " . $files_array['file']['error']);
+        }
     }
 }

@@ -44,7 +44,8 @@ class FormValidation {
 
     public function validate($post_array) {
         foreach ($post_array as $key => $item) {
-            if ($this->rules[$key]) {
+            // Добавляем проверку существования правила для этого ключа
+            if (isset($this->rules[$key]) && $this->rules[$key]) {
                 foreach ($this->rules[$key] as $rule) {
                     $this->$rule($item, $key);
                 }

@@ -12,11 +12,17 @@ class TestModel extends Model {
     }
 
     public function createTest($post_array) {
-        $checkboxes = array_filter([
-            $post_array["checkbox1"],
-            $post_array["checkbox2"],
-            $post_array["checkbox3"]
-        ]);
+            // Используем проверку isset для каждого чекбокса
+            $checkboxes = array_filter([
+                isset($post_array["checkbox1"]) ? $post_array["checkbox1"] : null,
+                isset($post_array["checkbox2"]) ? $post_array["checkbox2"] : null,
+                isset($post_array["checkbox3"]) ? $post_array["checkbox3"] : null
+            ]);
+            
+            // Убираем null значения
+            $checkboxes = array_filter($checkboxes, function($value) {
+                return $value !== null;
+            });
         $checkboxesWithComma = implode(', ', $checkboxes);
 
         $result = $this->validator->getResult();

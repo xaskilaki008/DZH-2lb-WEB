@@ -15,8 +15,9 @@ class BaseActiveRecord {
 
 	public static function getFields() {
 		$stmt = static::$pdo->query("SHOW FIELDS FROM ".static::$tablename);
+		static::$dbfields = []; // очищаем массив
 		while ($row = $stmt->fetch()) {
-			static::$dbfields[$row['Field']] = $row['Type'];
+			static::$dbfields[] = $row['Field']; // сохраняем только имена полей
 		}
 	}
 
@@ -89,19 +90,32 @@ class BaseActiveRecord {
 	public function save($data) {
 		static::setupConnection();
 		
-		$values = implode("', '", $data);
-		$values = '\'' . $values . '\'';
+		// ДЕБАГ: посмотрим что у нас в свойствах
+		error_log("Table: " . static::$tablename);
+		error_log("DB fields: " . print_r(static::$dbfields, true));
+		error_log("Data: " . print_r($data, true));
+		
 		$fields = implode("`, `", static::$dbfields);
 		$fields = '`' . $fields . '`';
 		
-		$tablename1 = static::$tablename;
-        $sql = "INSERT INTO $tablename1 ($fields) VALUES ($values)";
-        $stmt = static::$pdo->query($sql);
-
-		if ($stmt) {
-			return $stmt->fetch(PDO::FETCH_ASSOC);
+		// Создаем плейсхолдеры для подготовленного запроса
+		$placeholders = implode(', ', array_fill(0, count(static::$dbfields), '?'));
+		
+		$tablename = static::$tablename;
+		$sql = "INSERT INTO $tablename ($fields) VALUES ($placeholders)";
+		
+		$stmt = static::$pdo->prepare($sql);
+		
+		// Преобразуем ассоциативный массив в простой (в порядке dbfields)
+		$values = [];
+		foreach (static::$dbfields as $field) {
+			$values[] = $data[$field] ?? null;
+		}
+		
+		if ($stmt->execute($values)) {
+			return static::$pdo->lastInsertId();
 		} else {
-			throw new Exception();
+			throw new Exception('Database error: ' . implode(' ', $stmt->errorInfo()));
 		}
 	}
 

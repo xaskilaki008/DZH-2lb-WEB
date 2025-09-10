@@ -7,8 +7,8 @@
 
 :root {
     --blue: #007bff;
-    --indigo: #6610f2;
-    --purple: #6f42c1;
+    --indigo: #106af2;
+    --purple: #4292c1;
     --pink: #e83e8c;
     --red: #dc3545;
     --orange: #fd7e14;
@@ -3082,7 +3082,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 .dropdown-item.active, .dropdown-item:active {
     color: #fff;
     text-decoration: none;
-    background-color: #563d7c
+    background-color: #7c3d69
 }
 
 .dropdown-item.disabled, .dropdown-item:disabled {

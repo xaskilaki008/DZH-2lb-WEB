@@ -106,11 +106,19 @@ class FormValidation {
     }
     
     public function isEmail($data, $key, $value = null) {
-		if (preg_match('/^((([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я\.]{1,}[0-9А-Яа-я]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/u', $data)) {
-			return true;
-		}
-		array_push($this->errors, "В поле $key неверно введена почта");
-	}
+    // Более простое и надежное регулярное выражение для email
+    if (filter_var($data, FILTER_VALIDATE_EMAIL)) {
+        return true;
+    }
+    
+    // Альтернативная проверка для кириллических email
+    if (preg_match('/^[a-zA-Z0-9а-яА-Я._%+-]+@[a-zA-Z0-9а-яА-Я.-]+\.[a-zA-Zа-яА-Я]{2,}$/u', $data)) {
+        return true;
+    }
+    
+    array_push($this->errors, "В поле $key неверно введена почта");
+    return false;
+    }
 
 	public function isPhone($data, $key, $value = null) {
 		if (preg_match('/^(\+7|\+3)([0-9]{8,10})$/', $data)) {

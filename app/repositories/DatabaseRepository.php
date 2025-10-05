@@ -2,23 +2,23 @@
 
 class DatabaseRepository implements DataRepository
 {
-    private PDO $db;
-    private string $table;
+    private $db;
+    private $table;
     
-    public function __construct(PDO $db, string $table)
+    public function __construct($db, $table)
     {
         $this->db = $db;
         $this->table = $table;
     }
     
-    public function all(): array
+    public function all()
     {
         $stmt = $this->db->query("SELECT * FROM {$this->table}");
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result ?: [];
     }
     
-    public function find(string $field, $value): array
+    public function find($field, $value)
     {
         $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE {$field} = ?");
         $stmt->execute([$value]);
@@ -26,7 +26,7 @@ class DatabaseRepository implements DataRepository
         return $result ?: [];
     }
     
-    public function save(array $data): bool
+    public function save($data)
     {
         if (isset($data['id'])) {
             $fields = [];
@@ -50,13 +50,13 @@ class DatabaseRepository implements DataRepository
         return $stmt->execute($values);
     }
     
-    public function delete($id): bool
+    public function delete($id)
     {
         $stmt = $this->db->prepare("DELETE FROM {$this->table} WHERE id = ?");
         return $stmt->execute([$id]);
     }
     
-    public static function createFromData(array $data): self
+    public static function createFromData($data)
     {
         throw new Exception("Use constructor for DatabaseRepository");
     }

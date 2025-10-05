@@ -2,7 +2,14 @@
 
 require_once 'app/core/DataRepository.php';
 require_once 'app/repositories/FileRepository.php';
-
+class HobbyModel extends Model {
+    protected static $repository = null;
+    
+    protected static function getRepository()
+    {
+        return null;
+    }
+}
 class GuestBookModel extends Model {
     protected static $repository = null;
     

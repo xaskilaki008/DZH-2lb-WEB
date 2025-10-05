@@ -1,6 +1,12 @@
 <?php
 
 class UploadPostsModel extends Model {
+    protected static $repository = null;
+    
+    protected static function getRepository()
+    {
+        return null;
+    }
     public function __construct() {
         static::$tablename = 'blog';
         static::$dbfields = array('author', 'title', 'text', 'date');

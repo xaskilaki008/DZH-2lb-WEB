@@ -61,7 +61,7 @@ class FormValidation {
     }
 
     public function isNotEmpty($data, $key) {
-		if (empty($data)) {
+        if (empty($data)) {
             if ($key == "fullname") {
                 $resultKey = "ФИО";
             } elseif ($key == "group") {
@@ -106,17 +106,12 @@ class FormValidation {
     }
     
     public function isEmail($data, $key, $value = null) {
-    // Более простое и надежное регулярное выражение для email
+    // Используем встроенную PHP функцию для валидации email
     if (filter_var($data, FILTER_VALIDATE_EMAIL)) {
         return true;
     }
     
-    // Альтернативная проверка для кириллических email
-    if (preg_match('/^[a-zA-Z0-9а-яА-Я._%+-]+@[a-zA-Z0-9а-яА-Я.-]+\.[a-zA-Zа-яА-Я]{2,}$/u', $data)) {
-        return true;
-    }
-    
-    array_push($this->errors, "В поле $key неверно введена почта");
+    array_push($this->errors, "В поле $key неверно введена почта. Используйте формат: example@domain.com");
     return false;
     }
 

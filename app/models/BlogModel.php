@@ -1,18 +1,41 @@
 <?php
 
 class BlogModel extends Model {
-    protected static ?DataRepository $repository = null;
-    
-    protected static function getRepository(): DataRepository {
-        if (self::$repository === null) {
-            // Для файлов
-            $columns = ['id', 'title', 'content', 'author', 'created_at'];
-            self::$repository = new FileRepository('posts.csv', ',', $columns);
-            
-            // Или для базы данных (раскомментируйте если нужно):
-            // $db = new PDO("mysql:dbname=web2;host=localhost;charset=utf8", "root", "");
-            // self::$repository = new DatabaseRepository($db, 'posts');
+    public function __construct() {
+        parent::__construct();
+        static::$tablename = 'blog';
+        static::$dbfields = array('title', 'image', 'text', 'date');
+    }
+
+    public function getPosts($get_array) {
+        $countOfPosts = $this->getCount();
+        $rowsPerPage = 3;
+        $totalPages = ceil($countOfPosts / $rowsPerPage);
+
+        if (isset($get_array['page']) && is_numeric($get_array['page'])) {
+            $currentPage = (int) $get_array['page'];
+        } else {
+            $currentPage = 1;
         }
-        return self::$repository;
+
+        if ((int) $currentPage > (int) $totalPages) {
+            $currentPage = $totalPages;
+        }
+
+        if ((int) $currentPage < 1) {
+            $currentPage = 1;
+        }
+
+        $offset = ($currentPage - 1) * $rowsPerPage;
+
+        $posts = $this->findByPage($offset, $rowsPerPage);
+
+        $result = [
+           "posts" => $posts,
+           "current_page" => $currentPage, 
+           "total_pages" => $totalPages 
+        ];
+
+        return $result;
     }
 }

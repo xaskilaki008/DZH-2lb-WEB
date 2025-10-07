@@ -5,7 +5,7 @@ require_once 'app/core/BaseActiveRecord.php';
 
 abstract class Model extends BaseActiveRecord {
     public $validator;
-    protected $attributes = [];
+    protected array $attributes = [];
     protected static $repository = null;
     
     function __construct() {
@@ -15,7 +15,7 @@ abstract class Model extends BaseActiveRecord {
     }
     
     // Метод для установки данных
-    public function setAttributes($data) {
+    public function setAttributes(array $data): void {
         $this->attributes = $data;
     }
     
@@ -23,18 +23,18 @@ abstract class Model extends BaseActiveRecord {
         return $this->attributes[$name] ?? null;
     }
     
-    public function __set($name, $value) {
+    public function __set($name, $value): void {
         $this->attributes[$name] = $value;
     }
     
-    public function toArray() {
+    public function toArray(): array {
         return $this->attributes;
     }
 
     /** 
      * @return static[]
      */
-    public static function all() {
+    public static function all(): array {
         $items = static::getRepository()->all();
         $models = [];
         
@@ -50,7 +50,7 @@ abstract class Model extends BaseActiveRecord {
     /** 
      * @return static[]
      */
-    public static function findBy($criteria) {
+    public static function findBy(array $criteria): array {
         $models = [];
         
         foreach ($criteria as $field => $value) {
@@ -66,22 +66,18 @@ abstract class Model extends BaseActiveRecord {
         return $models;
     }
 
-    // Исправленный метод для совместимости с BaseActiveRecord
-    public function save($data = null) {
-        if ($data === null) {
-            $data = $this->attributes;
-        }
-        static::getRepository()->save($data);
+    public function save(): void {
+        static::getRepository()->save($this->attributes);
     }
 
-    public static function create($data) {
+    public static function create(array $data): static {
         $model = new static();
         $model->setAttributes($data);
         $model->save();
         return $model;
     }
 
-    public function delete() {
+    public function delete(): void {
         if (isset($this->attributes['id'])) {
             static::getRepository()->delete($this->attributes['id']);
         }

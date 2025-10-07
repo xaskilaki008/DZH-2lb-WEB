@@ -6,8 +6,7 @@ require_once 'app/repositories/FileRepository.php';
 class GuestBookModel extends Model {
     protected static $repository = null;
     
-    protected static function getRepository()
-    {
+    protected static function getRepository() {
         if (self::$repository === null) {
             $columns = ['id', 'fullname', 'email', 'created_at', 'review'];
             self::$repository = new FileRepository('reviews.inc', ';', $columns);
@@ -16,8 +15,7 @@ class GuestBookModel extends Model {
     }
     
     // Старые методы для обратной совместимости
-    public function parseReviews()
-    {
+    public function parseReviews() {
         $items = self::all();
         $reviews = [];
         
@@ -33,8 +31,7 @@ class GuestBookModel extends Model {
         return array_reverse($reviews);
     }
 
-    public function addReview($data)
-    {
+    public function addReview($data) {
         // Создаем модель и устанавливаем атрибуты
         $model = new static();
         $model->setAttributes([
@@ -44,5 +41,14 @@ class GuestBookModel extends Model {
             'review' => $data[3] ?? ''
         ]);
         $model->save();
+    }
+    
+    // Новый метод для исправления кривых данных
+    public function fixBrokenData() {
+        $allItems = self::all();
+        foreach ($allItems as $item) {
+            // Пересохраняем каждую запись для исправления формата
+            $item->save();
+        }
     }
 }

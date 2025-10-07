@@ -2,11 +2,11 @@
 
 class FileRepository implements DataRepository
 {
-    private $filePath;
-    private $delimiter;
-    private $columns;
+    private string $filePath;
+    private string $delimiter;
+    private array $columns;
     
-    public function __construct($filePath, $delimiter = ';', $columns = [])
+    public function __construct(string $filePath, string $delimiter = ';', array $columns = [])
     {
         $this->filePath = $filePath;
         $this->delimiter = $delimiter;
@@ -17,7 +17,7 @@ class FileRepository implements DataRepository
         }
     }
     
-    public function all()
+    public function all(): array
     {
         $items = [];
         
@@ -33,7 +33,7 @@ class FileRepository implements DataRepository
         return $items;
     }
     
-    public function find($field, $value)
+    public function find(string $field, $value): array
     {
         $allItems = $this->all();
         $results = [];
@@ -47,7 +47,7 @@ class FileRepository implements DataRepository
         return $results;
     }
     
-    public function save($data)
+    public function save(array $data): bool
     {
         if (!isset($data['id'])) {
             $allItems = $this->all();
@@ -78,7 +78,7 @@ class FileRepository implements DataRepository
         return $this->writeAll($allItems);
     }
     
-    public function delete($id)
+    public function delete($id): bool
     {
         $allItems = $this->all();
         $newItems = [];
@@ -99,7 +99,7 @@ class FileRepository implements DataRepository
         return false;
     }
     
-    public static function createFromData($data)
+    public static function createFromData(array $data): self
     {
         return new self(
             $data['filePath'] ?? '',
@@ -108,7 +108,7 @@ class FileRepository implements DataRepository
         );
     }
     
-    private function mapToAssociativeArray($row)
+    private function mapToAssociativeArray(array $row): array
     {
         if (empty($this->columns)) {
             return array_combine(range(0, count($row) - 1), $row);
@@ -121,7 +121,7 @@ class FileRepository implements DataRepository
         return $result;
     }
     
-    private function writeAll($items)
+    private function writeAll(array $items): bool
     {
         $tempFile = $this->filePath . '.tmp';
         

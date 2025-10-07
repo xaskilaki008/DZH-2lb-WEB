@@ -1,13 +1,6 @@
 <?php
 
 class EditBlogModel extends Model {
-    protected static $repository = null;
-    
-    protected static function getRepository()
-    {
-        // Временная реализация
-        return null;
-    }
     public function __construct() {
         parent::__construct();
         static::$tablename = 'blog';

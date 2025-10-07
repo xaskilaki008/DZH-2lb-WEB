@@ -1,12 +1,6 @@
 <?php
 
 class HobbyModel extends Model {
-    protected static $repository = null;
-    
-    protected static function getRepository()
-    {
-        return null;
-    }
 	public function get_data() {	
 		return [
             [

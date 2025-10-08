@@ -1,0 +1,122 @@
+F:.
+|   .htaccess
+|   gulpfile.js
+|   index.php
+|   package-lock.json
+|   package.json
+|   posts.csv
+|   Readme1.md
+|   reviews copy.inc
+|   reviews.inc
+|   task2.php
+|   Задание на 2 лабу с deep seek.md
+|
++---app
+|   +---controllers
+|   |       BlogController.php
+|   |       ContactController.php
+|   |       EditBlogController.php
+|   |       ErrorController.php
+|   |       GuestBookController.php
+|   |       HistoryController.php
+|   |       HobbyController.php
+|   |       MainController.php
+|   |       PhotoController.php
+|   |       StudiesController.php
+|   |       TestController.php
+|   |       UploadPostsController.php
+|   |       UploadReviewsController.php
+|   |
+|   +---core
+|   |       BaseActiveRecord.php
+|   |       Controller.php
+|   |       Model.php
+|   |       Route.php
+|   |       View.php
+|   |
+|   +---models
+|   |   |   BlogModel.php
+|   |   |   EditBlogModel.php
+|   |   |   GuestBookModel.php
+|   |   |   HobbyModel.php
+|   |   |   PhotoModel.php
+|   |   |   TestModel.php
+|   |   |   UploadPostsModel.php
+|   |   |
+|   |   \---validators
+|   |           CustomFormValidation.php
+|   |           FormValidation.php
+|   |           ResultsVerification.php
+|   |
+|   \---views
+|       |   BlogView.php
+|       |   ContactView.php
+|       |   EditBlogView.php
+|       |   ErrorView.php
+|       |   GuestBookView.php
+|       |   LayoutView.php
+|       |   MainView.php
+|       |   PhotoView.php
+|       |   StudiesView.php
+|       |   TestView.php
+|       |   UploadPostsView.php
+|       |   UploadReviewsView.php
+|       |
+|       +---blog
+|       \---guestbook
++---public
+|   +---css
+|   |       bootstrap.min.css
+|   |       main.css
+|   |
+|   +---img
+|   |   |   about-img.jpg
+|   |   |   books.jpg
+|   |   |   films.jpg
+|   |   |   games.png
+|   |   |   music.png
+|   |   |   not-found.png
+|   |   |   photo-main.jpg
+|   |   |   sport.jpg
+|   |   |
+|   |   \---photo
+|   |           african-grey-parrot-4424746_1280.jpg
+|   |           animal-4454043_1280.jpg
+|   |           ara-3601194_640.jpg
+|   |           desert-1916882_1280.jpg
+|   |           hot-air-balloons-4381674_1280.jpg
+|   |           landscape-4449408_1280.jpg
+|   |           norway-4453338_1280.jpg
+|   |           owl-4461236_640.jpg
+|   |           pets-4415649_1280.jpg
+|   |           pine-cones-4454654_1280.jpg
+|   |           plantation-4452538_1280.jpg
+|   |           port-4401223_1280.jpg
+|   |           sea-2361247_640.jpg
+|   |           snail-4428838_1280.jpg
+|   |           squirrel-4425612_1280.jpg
+|   |           stingray-4392776_1280.jpg
+|   |           tree-4450514_1280.jpg
+|   |           twilight-4453762_1280.jpg
+|   |
+|   +---js
+|   |       dropdown.js
+|   |       getHistory.js
+|   |       modal.js
+|   |       openPhoto.js
+|   |       setHistory.js
+|   |
+|   \---scss
+|           main.scss
+|
+\---uploads
+        1757332243_лосины.jpeg
+        1757332267_лосины.jpeg
+        1757332271_лосины.jpeg
+        1757332373_b4ddb7f1e6a8f75eb600d08dc283529b.jpg
+        1757513149_Снимок экрана 2025-09-10 170536.png
+        1757656602_Снимок экрана 2025-09-10 170829.png
+        1757659538_Снимок экрана 2025-07-16 111449.png
+        1759132409_Снимок экрана 2025-09-29 105314.png
+        1759133014_image_2025-09-13_00-54-53 (3).png
+        Снимок экрана 2025-09-10 170829.png

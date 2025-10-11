@@ -24,11 +24,18 @@ class BaseActiveRecord
         }
     }
 
-    public static function setupConnection()
-    {
+    public static function setupConnection() {
         if (!isset(static::$pdo)) {
             try {
                 static::$pdo = new PDO("mysql:dbname=web2; host=localhost; char-set=utf8", "root", "");
+                
+                // ДОБАВИТЬ ОТЛАДКУ - проверим список таблиц
+                $stmt = static::$pdo->query("SHOW TABLES");
+                $tables = $stmt->fetchAll(PDO::FETCH_COLUMN);
+                error_log("=== AVAILABLE TABLES ===");
+                error_log(print_r($tables, true));
+                error_log("=== LOOKING FOR TABLE: " . static::$tablename . " ===");
+                
             } catch (PDOException $ex) {
                 die("Ошибка подключения к БД: $ex");
             }
@@ -95,36 +102,40 @@ class BaseActiveRecord
         return current($result);
     }
 
-    public function save($data)
-    {
+    public function save($data) {
         static::setupConnection();
-
-        // ДЕБАГ: посмотрим что у нас в свойствах
+        
+        // ДЕБАГ: посмотрим что сохраняем
+        error_log("=== SAVING TO DB ===");
         error_log("Table: " . static::$tablename);
         error_log("DB fields: " . print_r(static::$dbfields, true));
-        error_log("Data: " . print_r($data, true));
-
+        error_log("Data to save: " . print_r($data, true));
+        
         $fields = implode("`, `", static::$dbfields);
         $fields = '`' . $fields . '`';
-
-        // Создаем плейсхолдеры для подготовленного запроса
+        
         $placeholders = implode(', ', array_fill(0, count(static::$dbfields), '?'));
-
+        
         $tablename = static::$tablename;
         $sql = "INSERT INTO $tablename ($fields) VALUES ($placeholders)";
-
+        error_log("SQL: " . $sql);
+        
         $stmt = static::$pdo->prepare($sql);
-
-        // Преобразуем ассоциативный массив в простой (в порядке dbfields)
+        
         $values = [];
         foreach (static::$dbfields as $field) {
             $values[] = $data[$field] ?? null;
         }
-
+        error_log("Values: " . print_r($values, true));
+        
         if ($stmt->execute($values)) {
-            return static::$pdo->lastInsertId();
+            $result = static::$pdo->lastInsertId();
+            error_log("Save successful, ID: " . $result);
+            return $result;
         } else {
-            throw new Exception('Database error: ' . implode(' ', $stmt->errorInfo()));
+            $error = 'Database error: ' . implode(' ', $stmt->errorInfo());
+            error_log($error);
+            throw new Exception($error);
         }
     }
 
@@ -156,24 +167,5 @@ class BaseActiveRecord
         }
 
         return $result;
-    }
-}
-class FileStorage {
-    private $filename = 'posts.csv';
-
-    public function getAll() {
-        // чтение из CSV файла
-    }
-
-    public function findBy($field, $value) {
-        // поиск в CSV по полю и значению
-    }
-
-    public function save($data) {
-        // сохранение в CSV с генерацией ID
-    }
-
-    public function delete($id) {
-        // удаление из CSV по ID
     }
 }

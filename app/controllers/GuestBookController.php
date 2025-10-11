@@ -11,25 +11,28 @@ class GuestBookController extends Controller {
         $vars = [ 'reviews' => $reviews ];	
 		$this->view->render('GuestBookView.php', 'Гостевая книга', $vars);
     }
-    
+
     function createAction() {
-		if (!empty($_POST)) {
-			$this->model->validator->validate($_POST);
+        if (!empty($_POST)) {
+            $this->model->validate($_POST);
             $errors = $this->model->validator->getErrors();
 
             if (empty($errors)) {
-                $newReview = [];
-                array_push($newReview, $_POST['fullname'], $_POST['Email'], date('Y-m-d H:i:s'), $_POST['review']);
+                // Использование новой абстракции
+                $newReview = [
+                    'author' => $_POST['fullname'],
+                    'email' => $_POST['Email'],
+                    'date' => date('Y-m-d H:i:s'),
+                    'text' => $_POST['review']
+                ];
+
                 $this->model->addReview($newReview);
                 $_POST = array();
             }
 
-            $reviews = $this->model->parseReviews();	
+            $reviews = $this->model->getAllReviews(); // ← новый метод
             $vars = [ 'errors' => $errors, 'reviews' => $reviews ];
-
-			$this->view->render('GuestBookView.php', 'Гостевая книга', $vars);
-		} else {
-            $this->view->render('GuestBookView.php', 'Гостевая книга');
+            $this->view->render('GuestBookView.php', 'Гостевая книга', $vars);
         }
-	}
+    }
 }
